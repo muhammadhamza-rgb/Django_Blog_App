@@ -10,6 +10,6 @@ load_dotenv()
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = False
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
