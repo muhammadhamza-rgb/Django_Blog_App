@@ -1,5 +1,6 @@
 # project/settings_base.py
 import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -48,6 +49,23 @@ TEMPLATES = [
         },
     },
 ]
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+}
 
 WSGI_APPLICATION = "project.wsgi.application"
 

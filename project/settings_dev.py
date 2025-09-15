@@ -1,23 +1,26 @@
 # project/settings_dev.py
 import os
 
+from dotenv import load_dotenv
+
 from .settings_base import *
 
-SECRET_KEY = "django-insecure-dev-key-for-local-use-only"
-DEBUG = True
+load_dotenv()
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+DEBUG = os.getenv("DEBUG", "True")
 ALLOWED_HOSTS = []
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "blogdb",  # local DB
-        "USER": "root",
-        "PASSWORD": "Hamza12!@mysql",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
+        "NAME": os.getenv("DB_NAME", "blogdb"),
+        "USER": os.getenv("DB_USER", "root"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "Hamza12!@mysql"),
+        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+        "PORT": os.getenv("DB_PORT", "3306"),
     }
 }
-
 
 # import os
 # from pathlib import Path
