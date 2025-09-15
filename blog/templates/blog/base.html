@@ -10,9 +10,9 @@
     {% comment %} <link rel="stylesheet" type='text/css' href="{% static 'blog/styles.css' %}"> {% endcomment %}
     
     {%if title%}
-        <title>{{ title }} | My Awesome Blog</title>
+        <title>{{ title }} | Awesome Blog</title>
     {% else %}
-        <title>My Awesome Blog</title>
+        <title>Awesome Blog</title>
     {% endif %}
 
 </head>
@@ -42,20 +42,34 @@
                 <li class="nav-item">
                 <a class="nav-link" href="#">New Blog</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
-                </li>
             </ul>
 
             <!-- Right side -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link" href="{%url 'user-login'%}">Login</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{%url 'user-register'%}">Register</a>
-                </li>
-            </ul>
+
+            
+            {%if user.is_authenticated%}
+              <a class="btn btn-primary me-2" href="{% url 'user-profile' %}">Profile</a>
+
+
+                <form method="post" action="{% url 'user-logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            {%else%}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'user-login'%}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'user-register'%}">Register</a>
+                    </li>
+                </ul>
+            {%endif%}
+
+            
+
+            
+
             </div>
         </div>
     </nav>

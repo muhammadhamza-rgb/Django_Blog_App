@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <div class="card shadow-sm p-4 rounded text-center">
+        
+        <!-- Profile Image -->
+        <div class="mb-3 text-center">
+            <img src="{{ user.profile.profile_picture.url }}"
+                alt="Profile Picture"
+                class="rounded-circle shadow-sm"
+                style="width: 120px; height: 120px; object-fit: cover;">
+        </div>
+
+        <h2 class="mb-4">Your Profile</h2>
+
+        <div class="text-start mb-3">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <hr>
+
+        <div>
+            <form method="post" action="{% url 'user-logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
