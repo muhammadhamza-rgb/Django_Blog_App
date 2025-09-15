@@ -12,3 +12,8 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+
+        return reverse("post-detail", kwargs={"pk": self.pk})

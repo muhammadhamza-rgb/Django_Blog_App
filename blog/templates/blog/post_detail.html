@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card shadow-sm mb-4">
+    <!-- Post Header -->
+    <div class="card-header d-flex align-items-center">
+        <img src="{{ post.author.profile.profile_picture.url }}" 
+             alt="{{ post.author.username }}" 
+             class="rounded-circle me-2" 
+             style="width: 40px; height: 40px; object-fit: cover;">
+        <div>
+            <strong>{{ post.author.username }}</strong><br>
+            <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
+        </div>
+    </div>
+
+    <!-- Post Body -->
+    <div class="card-body">
+        <h3 class="card-title">{{ post.title }}</h3>
+        <p class="card-text">{{ post.content }}</p>
+    </div>
+
+    
+</div>
+{% endblock content %}

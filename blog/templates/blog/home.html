@@ -4,16 +4,32 @@
     <h1>Welcome to the Blog</h1>
     <p>Here are the latest posts:</p>
 
-<div class="container my-4">
-    {% for post in posts %}
-        <div class="card mb-4 shadow-sm">
-        <div class="card-body">
+        <div class="container my-4">
+            {% for post in posts %}
+                <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+            <!-- Small Profile Image -->
+            <img src="{{ post.author.profile.profile_picture.url }}" 
+                alt="{{ post.author.username }}"
+                class="rounded-circle me-2"
+                style="width:40px; height:40px; object-fit:cover;">
+            
             <!-- Post Title -->
-            <h3 class="card-title">{{ post.title }}</h3>
+            <h3 class="card-title mb-0">
+            <a href="{% url 'post-detail' post.pk %}" 
+                class="text-decoration-none text-dark link-primary">
+                {{ post.title }}
+            </a>
+            </h3>
+
+
+        </div>
 
             <!-- Author and Date -->
             <p class="text-muted mb-2">
-            By <strong>{{ post.author }}</strong> || {{ post.date_posted }}
+            By <strong>{{ post.author }}</strong> ||{{ post.date_posted|date:"d F, Y" }}
+
             </p>
 
             <!-- Post Content -->

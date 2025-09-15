@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-
+{% load crispy_forms_tags %}s
 {% block content %}
 <div class="col-md-8 offset-md-2">
     <div class="card shadow-sm p-4 rounded text-center">
@@ -20,13 +20,37 @@
         </div>
 
         <hr>
-
         <div>
             <form method="post" action="{% url 'user-logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
+            </form>
         </div>
+
+        
+    </div>
+
+    <div class="card shadow-sm p-4 rounded text-center mt-4">
+        
+        
+        <h2 class="mb-4">Update the profile here</h2>
+
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ user_update_form|crispy }} 
+                {{ profile_update_form|crispy }}
+            </fieldset>
+
+            <div class="d-grid">
+                <button class="btn btn-primary btn-block" type="submit">
+                    Update Profile
+                </button>
+            </div>
+        </form>
+
+        
     </div>
 </div>
 {% endblock %}
