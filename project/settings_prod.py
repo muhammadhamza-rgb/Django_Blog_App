@@ -12,4 +12,4 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
+DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
