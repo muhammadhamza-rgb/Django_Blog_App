@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DJANGO_ENV = os.getenv("DJANGO_ENV", "development")
+DJANGO_ENV = os.getenv("DJANGO_ENV")
 
 if DJANGO_ENV == "production":
     from .settings_prod import *
