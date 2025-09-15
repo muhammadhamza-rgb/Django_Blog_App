@@ -7,11 +7,11 @@ name = "pypi"
 mysqlclient = "*"
 django = "*"
 dj-database-url = "*"
-psycopg2-binary = "*"
 python-dotenv = "*"
 gunicorn = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
