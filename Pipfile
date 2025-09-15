@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 mysqlclient = "*"
 django = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
