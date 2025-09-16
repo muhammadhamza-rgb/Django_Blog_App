@@ -13,12 +13,22 @@
             <strong>{{ post.author.username }}</strong><br>
             <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
         </div>
+
+        <!-- Only show edit button if current user is the author -->
+    {% if user == post.author %}
+        <div class="ms-auto">
+            <a href="{% url 'post-update' post.pk %}" class="btn btn-sm btn-outline-primary">
+                Edit Post
+            </a>
+        </div>
+    {% endif %}
+
     </div>
 
     <!-- Post Body -->
     <div class="card-body">
         <h3 class="card-title">{{ post.title }}</h3>
-        <p class="card-text">{{ post.content }}</p>
+        <p class="card-text"><p>{{ post.content|linebreaks }}</p></p>
     </div>
 
     
