@@ -14,8 +14,11 @@ crispy-bootstrap5 = "*"
 waitress = "*"
 pillow = "*"
 psycopg2-binary = "*"
+faker = "*"
+djlint = "*"
 
 [dev-packages]
+djlint = "*"
 
 [requires]
 python_version = "3.13"

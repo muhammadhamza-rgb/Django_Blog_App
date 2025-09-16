@@ -2,135 +2,128 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <style>
+    <head>
+        <style>
         .form-label {
     text-align: left !important;
     display: block;
 }
 
-    </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    {% comment %} <link rel="stylesheet" type='text/css' href="{% static 'blog/styles.css' %}"> {% endcomment %}
-    
-    {%if title%}
-        <title>{{ title }} | Awesome Blog</title>
-    {% else %}
-        <title>Awesome Blog</title>
-    {% endif %}
-
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <!-- Brand / Logo -->
-            <a class="navbar-brand" href="#">MyBlog</a>
-
-            <!-- Toggler for mobile view -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- Left side -->
-                <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{%url 'blog-home'%}">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{%url 'blog-about'%}">About</a>
-                </li>
-                
-                <li class="nav-item">
-                <a class="nav-link" href="{%url 'post-create' %}">Add Blog</a>
-                </li>
-            </ul>
-
-            <!-- Right side -->
-
-            
-            {%if user.is_authenticated%}
-              <a class="btn btn-primary me-2" href="{% url 'user-profile' %}">Profile</a>
-
-
-                <form method="post" action="{% url 'user-logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
-            {%else%}
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{%url 'user-login'%}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{%url 'user-register'%}">Register</a>
-                    </li>
-                </ul>
-            {%endif%}
-
-            
-
-            
-
+        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+        {% comment %} <link rel="stylesheet" type='text/css' href="{% static 'blog/styles.css' %}"> {% endcomment %}
+        {% if title %}
+            <title>{{ title }} | Awesome Blog</title>
+        {% else %}
+            <title>Awesome Blog</title>
+        {% endif %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- Brand / Logo -->
+                <a class="navbar-brand" href="/">MyBlog</a>
+                <!-- Toggler for mobile view -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Left side -->
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'blog-home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog-about' %}">About</a>
+                        </li>
+                    </ul>
+                    <!-- Right side -->
+                    {% if user.is_authenticated %}
+                        <div class="d-flex flex-wrap align-items-center">
+                            <a class="btn btn-outline-light me-2"
+                               href="{% url 'user-posts' user.username %}">My Posts</a>
+                            <a class="btn btn-primary me-2" href="{% url 'post-create' %}">Add Blog</a>
+                            <a class="btn btn-primary me-2" href="{% url 'user-profile' %}">Profile</a>
+                            {% comment %} <form method="post" action="{% url 'user-logout' %}" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                            </form> {% endcomment %}
+                        </div>
+                    {% else %}
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="btn btn-primary me-2" href="{% url 'user-login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{% url 'user-register' %}">Register</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-    </nav>
-
-    <main role="main" class="container my-5">
+        </nav>
+        <main role="main" class="container my-5">
             <div class="row">
                 <!-- Main Content -->
                 <div class="col-md-8">
-                <div class="p-4 bg-white rounded shadow-sm">
-                    <!-- Display messages -->
-                    {% if messages %}
-                        <div class="container mt-3">
-                            {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="p-4 bg-white rounded shadow-sm">
+                        <!-- Display messages -->
+                        {% if messages %}
+                            <div class="container mt-3">
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                                         role="alert">
+                                        {{ message }}
+                                        <button type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-
-                    {% block content %}{% endblock %}
+                        {% endif %}
+                        {% block content %}{% endblock %}
+                    </div>
                 </div>
-                </div>
-
                 <!-- Sidebar -->
                 <div class="col-md-4">
-                <div class="content-section bg-light p-4 rounded shadow-sm">
-                    <h4 class="mb-3">📌 Our Sidebar</h4>
-                    <p class="text-muted">Quick access to useful links and updates:</p>
-                    <ul class="list-group list-group-flush">
-                    <li class="list-group-item">📝 Latest Posts</li>
-                    <li class="list-group-item">📢 Announcements</li>
-                    <li class="list-group-item">📅 Calendars</li>
-                    <li class="list-group-item">✨ More...</li>
-                    </ul>
-                </div>
+                    <div class="content-section bg-light p-4 rounded shadow-sm">
+                        <h4 class="mb-3">📌 Our Sidebar</h4>
+                        <p class="text-muted">Quick access to useful links and updates:</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">📝 Latest Posts</li>
+                            <li class="list-group-item">📢 Announcements</li>
+                            <li class="list-group-item">📅 Calendars</li>
+                            <li class="list-group-item">✨ More...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-    </main>
-
-
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-    <div class="container">
-        <p class="mb-0">&copy; 2025 MyBlog. All Rights Reserved.</p>
-        <p class="mb-0">
-        <a href="{%url 'blog-about'%}" class="text-white text-decoration-none me-3">About</a>
-        <a href="/blogs" class="text-white text-decoration-none me-3">Blogs</a>
-        <a href="/contact" class="text-white text-decoration-none">Contact</a>
-        </p>
-    </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
+        </main>
+        <footer class="bg-dark text-white text-center py-3 mt-5">
+            <div class="container">
+                <p class="mb-0">&copy; 2025 MyBlog. All Rights Reserved.</p>
+                <p class="mb-0">
+                    <a href="{% url 'blog-about' %}"
+                       class="text-white text-decoration-none me-3">About</a>
+                    <a href="{% url 'blog-home' %}"
+                       class="text-white text-decoration-none me-3">Blogs</a>
+                    <a href="/" class="text-white text-decoration-none">Contact</a>
+                </p>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

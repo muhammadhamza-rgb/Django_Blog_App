@@ -20,6 +20,10 @@
             <a href="{% url 'post-update' post.pk %}" class="btn btn-sm btn-outline-primary">
                 Edit Post
             </a>
+        
+            <a href="{% url 'post-delete' post.pk %}" class="btn btn-sm btn-outline-danger">
+                Delete Post
+            </a>
         </div>
     {% endif %}
 
@@ -27,8 +31,8 @@
 
     <!-- Post Body -->
     <div class="card-body">
-        <h3 class="card-title">{{ post.title }}</h3>
-        <p class="card-text"><p>{{ post.content|linebreaks }}</p></p>
+        <h3 class="card-title">{{ post.title | title }}</h3>
+        <p class="card-text"><p>{{ post.content|capfirst|linebreaks }}</p></p>
     </div>
 
     

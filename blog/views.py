@@ -1,6 +1,7 @@
 # from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -24,6 +25,7 @@ class PostListView(ListView):
     template_name = "blog/home.html"  # <app>/<model>_<viewtype>.html
     context_object_name = "posts"
     ordering = ["-date_posted"]
+    paginate_by = 3
 
 
 class PostDetailView(DetailView):
@@ -55,6 +57,34 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.author:
             return True
         return False
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = "/"
+    # template_name = "blog/post_confirm_delete.html"  # <app>/<model>_<viewtype>.html
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class UserPostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = "blog/user_posts.html"  # <app>/<model>_<viewtype>.html
+    context_object_name = "posts"
+    paginate_by = 3
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get("username"))
+        return Post.objects.filter(author=user).order_by("-date_posted")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_profile"] = User.objects.get(username=self.kwargs.get("username"))
+        return context
 
 
 def about(request):
