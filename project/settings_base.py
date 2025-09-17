@@ -122,7 +122,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
-<<<<<<< HEAD
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
@@ -144,5 +143,3 @@ MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 # https://awsblogappbucket.s3.us-east-1.amazonaws.com/media/profile_pics/default.jpg
 # https://awsblogappbucket.s3.us-east-1.amazonaws.com/media/profile_pics/default.jpg
-=======
->>>>>>> 2cc6efebc48a5b0b25474553f2d148e0927b1d7e
