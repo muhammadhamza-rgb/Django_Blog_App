@@ -14,6 +14,11 @@ urlpatterns = [
         views.UserPostListView.as_view(),
         name="user-posts",
     ),
+    path(
+        "post/category/<str:category>/",
+        views.CategoryPostListView.as_view(),
+        name="post-category",
+    ),
     path("post/<int:pk>/", views.PostDetailView.as_view(), name="post-detail"),
     path("post/<int:pk>/delete/", views.PostDeleteView.as_view(), name="post-delete"),
     path("post/new/", views.PostCreateView.as_view(), name="post-create"),

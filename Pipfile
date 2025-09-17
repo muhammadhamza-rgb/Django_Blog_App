@@ -16,6 +16,8 @@ pillow = "*"
 psycopg2-binary = "*"
 faker = "*"
 djlint = "*"
+boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
 djlint = "*"
