@@ -18,6 +18,7 @@ faker = "*"
 djlint = "*"
 boto3 = "*"
 django-storages = "*"
+sendgrid = "*"
 
 [dev-packages]
 djlint = "*"

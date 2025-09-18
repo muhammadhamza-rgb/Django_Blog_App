@@ -10,9 +10,21 @@ class Post(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     # --- new field ---
+    CATEGORY_CHOICES = [
+        ("Technology", "Technology"),
+        ("Health", "Health"),
+        ("Education", "Education"),
+        ("Travel", "Travel"),
+        ("Food", "Food"),
+        ("Lifestyle", "Lifestyle"),
+        ("Finance", "Finance"),
+        ("Others", "Others"),
+    ]
     category = models.CharField(
-        max_length=100, blank=True, null=True, editable=True
-    )  # optional text category
+        max_length=100,
+        choices=CATEGORY_CHOICES,
+        default="Others",
+    )
 
     def __str__(self):
         return str(self.title)
