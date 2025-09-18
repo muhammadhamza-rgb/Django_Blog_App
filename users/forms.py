@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 
 from .models import Profile
@@ -21,6 +22,12 @@ class UserRegisterForm(UserCreationForm):
         for fieldname in ["username", "password1", "password2"]:
             self.fields[fieldname].help_text = None
 
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("This email is already in use.")
+        return email
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(label="Email")
@@ -35,6 +42,12 @@ class UserUpdateForm(forms.ModelForm):
         # Remove help texts
         for fieldname in ["username"]:
             self.fields[fieldname].help_text = None
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("This email is already in use.")
+        return email
 
 
 class ProfileUpdateForm(forms.ModelForm):
