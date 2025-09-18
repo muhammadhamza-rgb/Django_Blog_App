@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "blog",
     "users",
     "storages",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -116,12 +117,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_REDIRECT_URL = "blog-home"
 LOGIN_URL = "user-login"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "apikey"  # this is the string 'apikey', literally
-EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+ANYMAIL = {
+    "SENDGRID_API_KEY": os.getenv("SENDGRID_API_KEY"),
+}
+# EMAIL_HOST = "smtp.sendgrid.net"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "apikey"  # this is the string 'apikey', literally
+# EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
 DEFAULT_FROM_EMAIL = "muhammad.hamza@aitomation.com"
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")

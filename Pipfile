@@ -19,6 +19,7 @@ djlint = "*"
 boto3 = "*"
 django-storages = "*"
 sendgrid = "*"
+django-anymail = {extras = ["sendgrid"], version = "*"}
 
 [dev-packages]
 djlint = "*"
