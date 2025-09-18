@@ -2,6 +2,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from . import views
+from .forms import SendGridPasswordResetForm
 
 urlpatterns = [
     path("register/", views.register, name="user-register"),
@@ -24,6 +25,7 @@ urlpatterns = [
         "password-reset/",
         auth_views.PasswordResetView.as_view(
             template_name="users/password_reset.html",
+            form_class=SendGridPasswordResetForm,
             extra_context={"title": "Password Reset"},
         ),
         name="password_reset",
