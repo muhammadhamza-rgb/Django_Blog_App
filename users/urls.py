@@ -5,8 +5,11 @@ from . import views
 from .forms import SendGridPasswordResetForm
 
 urlpatterns = [
+    path("post/json/", views.users_json, name="blog-home-json"),
     path("register/", views.register, name="user-register"),
     path("profile/", views.profile, name="user-profile"),
+    # admin (or someone with permissions) can edit other user’s profile
+    path("profile/<int:user_id>/", views.profile, name="user-profile"),
     path(
         "login/",
         auth_views.LoginView.as_view(
@@ -54,4 +57,5 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+    path("admin/", views.admin_access, name="admin"),
 ]

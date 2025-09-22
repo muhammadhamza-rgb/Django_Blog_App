@@ -34,11 +34,6 @@
           <a href="{% url 'post-detail' post.pk %}"
              class="btn btn-sm btn-outline-primary">Read More</a>
           <!-- Status -->
-          {% comment %} {% if post.published %}
-      <span class="badge bg-success">Published ✅</span>
-      {% else %}
-      <span class="badge bg-danger">Draft ❌</span>
-          {% endif %} {% endcomment %}
         </div>
       </div>
     {% endfor %}
@@ -82,4 +77,4 @@
       </ul>
     </nav>
   {% endif %}
-{% endblock %}
+{% endblock content %}

@@ -10,7 +10,7 @@ urlpatterns = [
         "post/<int:pk>/update/", views.PostUpdateView.as_view(), name="post-update"
     ),  # it should be before post-detail
     path(
-        "posts/user/<str:username>/",
+        "post/user/<str:username>/",
         views.UserPostListView.as_view(),
         name="user-posts",
     ),
