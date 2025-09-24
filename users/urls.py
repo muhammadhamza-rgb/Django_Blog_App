@@ -9,7 +9,12 @@ urlpatterns = [
     path("register/", views.register, name="user-register"),
     path("profile/", views.profile, name="user-profile"),
     # admin (or someone with permissions) can edit other user’s profile
-    path("profile/<int:user_id>/", views.profile, name="user-profile"),
+    path("profile/<int:user_id>/", views.profile, name="user-profile_update"),
+    path(
+        "profile/delete/<int:user_id>/",
+        views.delete_profile,
+        name="user-profile-delete",
+    ),
     path(
         "login/",
         auth_views.LoginView.as_view(

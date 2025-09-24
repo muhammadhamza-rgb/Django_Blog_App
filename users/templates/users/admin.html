@@ -55,4 +55,26 @@
             </div>
         </div>
     </div>
+    {% block admin_content %}
+        <div id="editProfileModalContainer">
+            <div class="modal fade"
+                 id="editProfileModal"
+                 tabindex="-1"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock admin_content %}
+    <div id="urls"
+         data-deleteurl="{% url 'user-profile-delete' 12345 %}"
+         data-updateurl="{% url 'user-profile_update' 12345 %}"></div>
+    <script src="{% static 'blog/js/posts.js' %}"></script>
 {% endblock content %}

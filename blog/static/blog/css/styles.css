@@ -1,0 +1,14 @@
+.form-label {
+    text-align: left !important;
+    display: block;
+}
+#usersTable {
+  width: 100% !important;
+}
+#usersTable th, #usersTable td {
+  white-space: nowrap;  /* keeps content neat */
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    justify-content: flex-start;
+}

@@ -84,6 +84,13 @@
                 </div>
             </div>
         </nav>
+        <!-- jQuery (DataTables requires it) -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <!-- your global JS -->
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <main role="main" class="container my-5">
             <div class="row">
                 <!-- Main Content -->
@@ -104,7 +111,8 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        {% block content %}{% endblock %}
+                        {% block content %}
+                        {% endblock content %}
                     </div>
                 </div>
                 <!-- Sidebar -->
@@ -155,14 +163,6 @@
                 </p>
             </div>
         </footer>
-        <!-- jQuery (DataTables requires it) -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- your global JS -->
-        <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{% static 'blog/js/posts.js' %}"></script>
     </body>
 </html>
 {% comment %} https://awsblogappbucket.s3.us-east-1.amazonaws.com/static/blog/js/posts.js
