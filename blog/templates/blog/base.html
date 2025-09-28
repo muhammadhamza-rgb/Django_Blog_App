@@ -1,0 +1,156 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet"
+              href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/theme.css' %}">
+        {% if title %}
+            <title>{{ title }} | Awesome Blog</title>
+        {% else %}
+            <title>Awesome Blog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div class="sidebar-fixed d-none d-md-flex flex-column flex-shrink-0 py-3 ps-3 pe-5 text-white position-fixed bg-primary-custom">
+            <a href="{% url 'blog-home' %}"
+               class="d-flex align-items-center  text-white text-decoration-none">
+                <img src="{{ user.profile.profile_picture.url }}"
+                     alt="{{ user.username }} profile picture"
+                     class="rounded-circle"
+                     style="width:40px;
+                            height:40px;
+                            object-fit:cover;
+                            border:2px solid #fff">
+                <h3 class="mb-0 ms-2 white">My Blogs</h3>
+            </a>
+            {% include "blog/sidebar.html" %}
+        </div>
+        <div class="offcanvas offcanvas-start offcanvas-custom text-white bg-primary-custom"
+             tabindex="-1"
+             id="sidebarOffcanvas">
+            <!-- Brand -->
+            <div class="d-flex align-items-center justify-content-between p-3 pb-0">
+                <a href="{% url 'blog-home' %}"
+                   class="d-flex align-items-center  text-white text-decoration-none">
+                    <img src="{{ user.profile.profile_picture.url }}"
+                         alt="{{ user.username }} profile picture"
+                         class="rounded-circle"
+                         style="width:40px;
+                                height:40px;
+                                object-fit:cover;
+                                border:2px solid #fff">
+                    <h3 class="mb-0 ms-2 white">My Blogs</h3>
+                </a>
+                <button type="button"
+                        class="btn-close btn-close-white text-end"
+                        data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body offcanvas-body-custom d-flex flex-column ">{% include "blog/sidebar.html" %}</div>
+        </div>
+        <!-- jQuery (DataTables requires it) -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <!-- your global JS -->
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <main role="main"
+              class="bg-body-custom main border-radius-start vh-100 d-flex flex-column">
+            <div class="d-flex p-3 flex-nowrap align-items-center border-bottom">
+                <div class="mw-20">
+                    <button class="btn btn-primary d-960 ms-2 my-2"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#sidebarOffcanvas"
+                            aria-controls="sidebarOffcanvas">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <!-- Right side -->
+                <div class="justify-content-end ms-auto">
+                    {% if user.is_superuser %}
+                        <a class="btn btn-outline-primary me-2 text-default-custom"
+                           href="{% url 'admin:index' %}">
+                            <i class="fa-solid fa-grip me-2"></i> Django Admin</a>
+                        <a class="btn {% if request.resolver_match.url_name == 'admin' %} bg-accent-primary-custom box-shadow-custom text-white-custom{% else %} text-default-custom {% endif %} me-2"
+                           href="{% url 'admin' %}"><i class="fa-solid fa-user-tie me-2"></i>Admin Panel</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <a class="btn {% if request.resolver_match.url_name == 'user-posts' and request.resolver_match.kwargs.username == user.username %} bg-accent-primary-custom box-shadow-custom text-white-custom{% else %} text-default-custom {% endif %} me-2"
+                           href="{% url 'user-posts' user.username %}"><i class="fa-solid fa-comments me-2"></i>My Posts</a>
+                        <a class="btn {% if request.resolver_match.url_name == 'post-create' %} bg-accent-primary-custom box-shadow-custom text-white-custom{% else %} text-default-custom {% endif %}  me-2"
+                           href="{% url 'post-create' %}"><i class="fa-solid fa-pencil me-2"></i>Add Blog</a>
+                        <a href="{% url 'user-profile' %}">
+                            <img src="{{ user.profile.profile_picture.url }}"
+                                 alt="{{ user.username }} profile picture"
+                                 class="rounded-circle"
+                                 style="width:40px;
+                                        height:40px;
+                                        object-fit:cover;
+                                        border:2px solid #ffffffff">
+                        </a>
+                    {% else %}
+                        <ul class="list-unstyled d-flex gap-2 mb-0">
+                            <li class="nav-item">
+                                <a class="btn btn-primary me-2" href="{% url 'user-login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary" href="{% url 'user-register' %}">Register</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex-grow-1 overflow-auto min-h-0 px-3 mb-3 border-radius-12 custom-scrollbar">
+                <!-- Main Content -->
+                <!-- Display messages -->
+                {% if messages %}
+                    <div class="container mt-3">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags == 'error' %}alert-danger {% else %}alert-{{ message.tags }} {% endif %} alert-dismissible fade show"
+                                 role="alert">
+                                {{ message }}
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% block content %}
+                {% endblock content %}
+                <footer class="bg-dark text-white text-center py-3 mt-5 border-radius-bottom-left">
+                    <div class="container">
+                        <p class="mb-0">&copy; 2025 MyBlog. All Rights Reserved.</p>
+                        <p class="mb-0">
+                            <a href="{% url 'blog-about' %}"
+                               class="text-white text-decoration-none me-3">About</a>
+                            <a href="{% url 'blog-home' %}"
+                               class="text-white text-decoration-none me-3">Blogs</a>
+                            <a href="/" class="text-white text-decoration-none">Contact</a>
+                        </p>
+                    </div>
+                </footer>
+            </div>
+        </main>
+        <script src="https://kit.fontawesome.com/78e0028209.js"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'blog/js/infinit_scroll.js' %}"></script>
+    </body>
+</html>
+{% comment %} https://awsblogappbucket.s3.us-east-1.amazonaws.com/static/blog/js/posts.js
+https://awsblogappbucket.s3.us-east-1.amazonaws.com/static/blog/js/posts.js
+https://awsblogappbucket.s3.us-east-1.amazonaws.com/static/blog/js/posts.js {% endcomment %}

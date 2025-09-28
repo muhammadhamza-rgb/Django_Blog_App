@@ -1,0 +1,149 @@
+:root {
+  /* ----------------------------
+     Background Colors
+  ---------------------------- */
+  --bg-primary-custom: #0f172a; /* bg-slate-900 */
+  --bg-secondary-custom: #1e293b; /* bg-slate-800 */
+  --bg-default-custom: #334155; /* bg-slate-700 */
+  --bg-white-custom: #ffffff;
+  --bg-body-custom: #d1e4ff;
+
+  /* ----------------------------
+     Accent / Gradient Colors
+  ---------------------------- */
+  --accent-primary-start-custom: #6366f1; /* indigo-500 */
+  --accent-primary-end-custom: #a855f7; /* purple-500 */
+
+  --accent-secondary-start-custom: #06b6d4; /* cyan-500 */
+  --accent-secondary-end-custom: #3b82f6; /* blue-500 */
+
+  --accent-default-start-custom: #ec4899; /* pink-500 */
+  --accent-default-end-custom: #f43f5e; /* rose-500 */
+  /* Inactive gradients */
+  --accent-primary-start-inactive-custom: #a3a3f7; /* lighter indigo */
+  --accent-primary-end-inactive-custom: #c79bf8; /* lighter purple */
+
+  --accent-secondary-start-inactive-custom: #8dd7e6; /* lighter cyan */
+  --accent-secondary-end-inactive-custom: #90bafc; /* lighter blue */
+
+  --accent-default-start-inactive-custom: #f8a3c2; /* lighter pink */
+  --accent-default-end-inactive: #f7a8a8; /* lighter rose */
+  /* ----------------------------
+     Text Colors
+  ---------------------------- */
+  --text-primary-custom: #ffffff; /* text-white */
+  --text-secondary-custom: #cbd5e1; /* text-slate-300 */
+  --text-default-custom: #000000; /* text-slate-400 */
+  --text-white-custom: #ffffff;
+  --text-inactive: #cbd5e1; /* slate-300 */
+  --text-custom: #d1e4ff;
+}
+
+/* ----------------------------
+   Utility Classes
+---------------------------- */
+
+/* Backgrounds */
+.bg-primary-custom {
+  background-color: var(--bg-primary-custom);
+}
+.bg-secondary-custom {
+  background-color: var(--bg-secondary-custom);
+}
+.bg-default-custom {
+  background-color: var(--bg-default-custom);
+}
+.bg-white-custom {
+  background-color: var(--bg-white-custom);
+}
+.bg-body-custom {
+  background: linear-gradient(
+    to bottom right,
+    var(--bg-body-custom),
+    var(--bg-white-custom)
+  );
+}
+
+/* Text Colors */
+.text-primary-custom {
+  color: var(--text-primary-custom);
+}
+.text-secondary-custom {
+  color: var(--text-secondary-custom);
+}
+.text-default-custom {
+  color: var(--text-default-custom);
+}
+.text-white-custom {
+  color: var(--text-white-custom);
+}
+.text-custom {
+  color: var(--text-custom);
+}
+
+/* Gradient Backgrounds */
+.bg-accent-primary-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary-start-custom),
+    var(--accent-primary-end-custom)
+  );
+  border: none;
+  box-shadow: 1px 10px 20px -10px rgb(255 255 255 / 30%);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.bg-accent-secondary-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-secondary-start-custom),
+    var(--accent-secondary-end-custom)
+  );
+  box-shadow: 1px 10px 20px -10px rgb(255 255 255 / 30%);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.bg-accent-default-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-default-start-custom),
+    var(--accent-default-end-custom)
+  );
+  box-shadow: 1px 10px 20px -10px rgb(255 255 255 / 30%);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* -----------------------------
+   Inactive Gradients
+----------------------------- */
+.bg-accent-primary-inactive-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary-start-inactive-custom),
+    var(--accent-primary-end-inactive-custom)
+  );
+  /* Glassmorphism */
+  opacity: 0.5; /* keeps it slightly transparent */
+  backdrop-filter: blur(10px); /* frosted blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+}
+
+.bg-accent-secondary-inactive-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-secondary-start-inactive-custom),
+    var(--accent-secondary-end-inactive-custom)
+  );
+  opacity: 0.5;
+}
+
+.bg-accent-default-inactive-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-default-start-inactive-custom),
+    var(--accent-default-end-inactive-custom)
+  );
+  opacity: 0.8;
+}
+
+.border-radius {
+  border-radius: 12px;
+}

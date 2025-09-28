@@ -1,0 +1,11 @@
+id,username,password,email,is_superuser,is_staff,is_active,first_name,last_name
+1,hamza,mypassword123,hamza@example.com,1,1,1,Hamza,Khan
+2,john,johnpass,john@example.com,0,0,1,John,Doe
+3,sara,sarapass,sara@example.com,0,0,1,Sara,Ali
+4,ali,alipass,ali@example.com,0,0,1,Ali,Shah
+5,nora,norapass,nora@example.com,0,0,1,Nora,Liu
+6,mike,mikepass,mike@example.com,0,0,1,Mike,Smith
+7,lina,linapass,lina@example.com,0,0,1,Lina,Chen
+8,omar,omarpass,omar@example.com,0,0,1,Omar,Hassan
+9,kate,katepass,kate@example.com,0,0,1,Kate,Jones
+10,leo,leopass,leo@example.com,0,0,1,Leo,Park

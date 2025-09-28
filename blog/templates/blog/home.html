@@ -1,0 +1,7 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  <div class="row" id="post-container">{% include 'blog/post_partial.html' %}</div>
+  <div id="loading" class="text-center my-3" style="display:none;">
+    <div class="spinner-border text-primary"></div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mysqlclient = "*"
+django = "*"
+dj-database-url = "*"
+python-dotenv = "*"
+gunicorn = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
+waitress = "*"
+pillow = "*"
+psycopg2-binary = "*"
+faker = "*"
+djlint = "*"
+boto3 = "*"
+django-storages = "*"
+sendgrid = "*"
+django-anymail = {extras = ["sendgrid"], version = "*"}
+
+[dev-packages]
+djlint = "*"
+
+[requires]
+python_version = "3.13"

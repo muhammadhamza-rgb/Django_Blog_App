@@ -1,0 +1,92 @@
+body {
+  overflow-x: hidden;
+}
+
+.form-label {
+  text-align: left !important;
+  display: block;
+}
+#usersTable {
+  width: 100% !important;
+}
+#usersTable th,
+#usersTable td {
+  white-space: nowrap; /* keeps content neat */
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  justify-content: flex-start;
+}
+
+/* For Webkit browsers: Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* scrollbar width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a855f7; /* thumb color */
+  border-radius: 3px; /* rounded thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* track is transparent */
+}
+
+.offcanvas-custom {
+  width: 250px !important;
+  max-width: 250px;
+}
+.offcanvas-body-custom {
+  padding-top: 0%;
+}
+
+@media (min-width: 960px) {
+  /* Sidebar visible */
+  .sidebar-fixed {
+    display: flex !important;
+    width: 250px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
+  .main {
+    margin-left: 250px !important ; /* leave space for sidebar */
+    position: fixed;
+    top: 0%;
+    left: -20px;
+    z-index: 100;
+  }
+  .d-960 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 959.98px) {
+  /* Sidebar hidden */
+  .sidebar-fixed {
+    display: none !important;
+  }
+  .main {
+    margin-left: 0;
+  }
+  .d-960 {
+    display: block !important;
+  }
+}
+
+.border-radius-start {
+  border-radius: 20px 0 0 20px;
+}
+.border-radius-bottom-left {
+  border-radius: 0 0 0 12px;
+}
+.border-radius-12 {
+  border-radius: 12px;
+}
+.border-radius-bottom-12 {
+  border-radius: 0 0 12px 12px;
+}
+.border-radius-top-12 {
+  border-radius: 12px 12px 0 0;
+}

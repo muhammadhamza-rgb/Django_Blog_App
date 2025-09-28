@@ -1,0 +1,3 @@
+- [x] Rename CSS variables in :root to add "-custom" suffix
+- [x] Rename class selectors to add "-custom" suffix
+- [x] Update var() references to use the new variable names

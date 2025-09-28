@@ -1,0 +1,11 @@
+id,hashed_password,is_superuser,username,first_name,last_name,email,is_staff,is_active
+8,pbkdf2_sha256$1000000$tUo2IS3JVUA9mQR54gO3ns$efUn0RGyyVNMzYEZwAjmmG2LePirfNV5oqCo/OgJtzY=,1,hamza1,Hamza,Khan,hamza@example.com,1,1
+9,pbkdf2_sha256$1000000$rf744EClYOqol4ecEwbn4V$k8nZCHvFKuXrnGsX23kOy/DH/Y+TvZt0dXN6rRq35Ag=,0,john,John,Doe,john@example.com,0,1
+10,pbkdf2_sha256$1000000$p1JEgXSk7CtVzIaBZsnRFJ$eO6S+fg5EnjCrdoIpdw2VJMkw1NlXDyLbpYj3FgFH5A=,0,sara,Sara,Ali,sara@example.com,0,1
+11,pbkdf2_sha256$1000000$nrpecNz5cBjd82Xz2SqKC6$VWvsE8A+lJKv1VcZqR/sMDyxVbw9MP+uUBQMW6OvGok=,0,ali,Ali,Shah,ali@example.com,0,1
+12,pbkdf2_sha256$1000000$sdtdIHe2hC0TjsAN9V6fIK$bqefblDENkprMA4yoJpFEomIaG1jpA0Cal2smvGZqKE=,0,nora,Nora,Liu,nora@example.com,0,1
+13,pbkdf2_sha256$1000000$TlXzBfMZ0jMl4DhVfoECts$jYNaZ2QCfNJQzwqQgBWo7j64NeMHuOTPmLaQibsg16Q=,0,mike,Mike,Smith,mike@example.com,0,1
+14,pbkdf2_sha256$1000000$5cOzKfqOU705EsOkcO6jkb$c5UJTnXh5jH859pkH6B6dzA3Te7rvv7inkESamYPvRU=,0,lina,Lina,Chen,lina@example.com,0,1
+15,pbkdf2_sha256$1000000$oU5uH4nNsTy1RvZrs1Fptj$seJHIz1FqpZbFSf+as94ia/gdU4SP1gTeNkzsJpDUVE=,0,omar,Omar,Hassan,omar@example.com,0,1
+16,pbkdf2_sha256$1000000$cZmjMKISVNfnoD2e7jrysS$7t8QM4E9HMj2lQGDuv4EbMeOalLj735uuz7DsdpoWlM=,0,kate,Kate,Jones,kate@example.com,0,1
+17,pbkdf2_sha256$1000000$WVGjXOxAItFEKFvsLhENMQ$gKwuhBc6LcLIjrh8mEhDn6f6UCrkjqqmAbGDBfY3IDU=,0,leo,Leo,Park,leo@example.com,0,1
