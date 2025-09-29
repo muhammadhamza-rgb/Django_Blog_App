@@ -14,8 +14,8 @@
   --accent-primary-start-custom: #6366f1; /* indigo-500 */
   --accent-primary-end-custom: #a855f7; /* purple-500 */
 
-  --accent-secondary-start-custom: #06b6d4; /* cyan-500 */
-  --accent-secondary-end-custom: #3b82f6; /* blue-500 */
+  --accent-secondary-start-custom: #00daff; /* cyan-500 */
+  --accent-secondary-end-custom: #0262ff; /* blue-500 */
 
   --accent-default-start-custom: #ec4899; /* pink-500 */
   --accent-default-end-custom: #f43f5e; /* rose-500 */
@@ -79,6 +79,9 @@
 }
 .text-custom {
   color: var(--text-custom);
+}
+.form-text {
+  color: #0d6efd;
 }
 
 /* Gradient Backgrounds */
@@ -146,4 +149,8 @@
 
 .border-radius {
   border-radius: 12px;
+}
+
+.bg-transparent {
+  background-color: transparent;
 }

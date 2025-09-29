@@ -1,40 +1,37 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
-
 {% block content %}
-<div class="card shadow-sm mb-4">
-    <!-- Post Header -->
-    <div class="card-header d-flex align-items-center">
-        <img src="{{ post.author.profile.profile_picture.url }}" 
-             alt="{{ post.author.username }}" 
-             class="rounded-circle me-2" 
-             style="width: 40px; height: 40px; object-fit: cover;">
-        <div>
-            <strong>{{ post.author.username }}</strong><br>
-            <small class="text-muted">{{ post.date_posted|date:"d F, Y" }}</small>
+    <div class="card shadow-sm mb-4 border-radius-12 bg-transparent">
+        <!-- Post Header -->
+        <div></div>
+        <div class="card-header d-flex align-items-center bg-primary-custom text-white border-radius-12">
+            <img src="{{ post.author.profile.profile_picture.url }}"
+                 alt="{{ post.author.username }}"
+                 class="rounded-circle me-2"
+                 style="width: 40px;
+                        height: 40px;
+                        object-fit: cover">
+            <div>
+                <strong>{{ post.author.username }}</strong>
+                <br>
+                <small>{{ post.date_posted|date:"d F, Y" }}</small>
+            </div>
+            <!-- Only show edit button if current user is the author -->
+            {% if user == post.author %}
+                <div class="ms-auto">
+                    <a href="{% url 'post-update' post.pk %}"
+                       class="btn btn-sm btn-outline-primary">Edit Post</a>
+                    <a href="{% url 'post-delete' post.pk %}"
+                       class="btn btn-sm btn-outline-danger">Delete Post</a>
+                </div>
+            {% endif %}
         </div>
-
-        <!-- Only show edit button if current user is the author -->
-    {% if user == post.author %}
-        <div class="ms-auto">
-            <a href="{% url 'post-update' post.pk %}" class="btn btn-sm btn-outline-primary">
-                Edit Post
-            </a>
-        
-            <a href="{% url 'post-delete' post.pk %}" class="btn btn-sm btn-outline-danger">
-                Delete Post
-            </a>
+        <!-- Post Body -->
+        <div class="card-body">
+            <h3 class="card-title">{{ post.title | title }}</h3>
+            <p class="card-text">
+                <p>{{ post.content|capfirst|linebreaks }}</p>
+            </p>
         </div>
-    {% endif %}
-
     </div>
-
-    <!-- Post Body -->
-    <div class="card-body">
-        <h3 class="card-title">{{ post.title | title }}</h3>
-        <p class="card-text"><p>{{ post.content|capfirst|linebreaks }}</p></p>
-    </div>
-
-    
-</div>
 {% endblock content %}

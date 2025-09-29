@@ -51,10 +51,12 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     z-index: 99;
   }
   .main {
-    margin-left: 250px !important ; /* leave space for sidebar */
     position: fixed;
-    top: 0%;
-    left: -20px;
+    top: 12px; /* space from top */
+    bottom: 12px; /* space from bottom */
+    right: 12px;
+    margin-left: 250px; /* leave space for sidebar */
+    width: calc(100% - 250px);
     z-index: 100;
   }
   .d-960 {
@@ -68,7 +70,13 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     display: none !important;
   }
   .main {
-    margin-left: 0;
+    position: fixed;
+    top: 0; /* space from top */
+    left: 0;
+    margin-left: 0; /* leave space for sidebar */
+    z-index: 100;
+    border-radius: 0% !important;
+    width: 100vw;
   }
   .d-960 {
     display: block !important;
@@ -89,4 +97,121 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 .border-radius-top-12 {
   border-radius: 12px 12px 0 0;
+}
+.border-radius-8 {
+  border-radius: 8px;
+}
+
+.form-title {
+  display: block;
+  width: 100%;
+  text-align: center; /* keep it centered */
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+
+  font-size: clamp(1.2rem, 5vw, 2rem);
+  letter-spacing: 1.4vw; /* responsive letter spacing */
+}
+
+/* Apply to all three fields */
+#id_title,
+#id_category,
+#id_content,
+#id_username,
+#id_password,
+#id_email,
+#id_password1,
+#id_password2 {
+  background: transparent; /* no background */
+  border: 1px solid #0d6efd; /* dark border */
+  border-radius: 12px; /* rounded corners */
+  padding: 12px 16px; /* good whitespace inside */
+  width: 100%; /* full width of container */
+  color: #0d6efd; /* text color white */
+  font-size: 1rem; /* readable font size */
+  outline: none; /* remove default outline */
+  box-sizing: border-box; /* include padding in width */
+  transition: border-color 0.3s, box-shadow 0.3s; /* smooth focus */
+
+  margin-top: 16px; /* add spacing between all fields */
+  display: block; /* ensure margin works */
+  width: 100%;
+}
+
+/* Focus effect */
+#id_title:focus,
+#id_category:focus,
+#id_content:focus,
+#id_username:focus,
+#id_password:focus,
+#id_email:focus,
+#id_password1:focus,
+#id_password2:focus {
+  border-color: #6366f1; /* highlight border on focus */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* subtle glow */
+}
+
+/* Optional: placeholder styling */
+#id_title::placeholder,
+#id_category::placeholder,
+#id_content::placeholder,
+#id_username::placeholder,
+#id_password::placeholder,
+#id_email::placeholder,
+#id_password1::placeholder,
+#id_password2::placeholder {
+  color: #0d6efd; /* lighter placeholder text */
+  opacity: 1; /* ensures opacity works in all browsers */
+}
+
+#id_content {
+  margin-bottom: 16px;
+}
+form label {
+  /* color: red; */
+  display: none !important;
+}
+
+form button {
+  padding: 12px 16px;
+}
+
+.modal-body {
+  z-index: 101;
+}
+.modal-backdrop {
+  z-index: 0 !important;
+}
+
+#usersTable th {
+  height: auto;
+  background: transparent;
+  color: white !important;
+}
+
+/* Header table wrapper */
+#usersTable_wrapper .dataTables_scrollHead {
+  background-color: var(--bg-primary-custom);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Header cells */
+#usersTable_wrapper .dataTables_scrollHead th {
+  background-color: var(--bg-primary-custom);
+  color: #ffffff; /* white text */
+  border-bottom: 2px solid #ffffff; /* optional border */
+}
+
+/* Remove background from the original table thead (optional) */
+#usersTable thead th {
+  background: transparent;
+}
+
+#usertable th {
+  text-align: center; /* center the text horizontally */
+  vertical-align: middle; /* optional: center vertically */
+}
+.dataTables_scroll {
+  margin-top: 10px;
 }

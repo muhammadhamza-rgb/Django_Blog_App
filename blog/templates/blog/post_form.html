@@ -1,21 +1,19 @@
 {% extends "blog/base.html" %}
-{% load crispy_forms_tags %}
-
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Create New Post</h4>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-8">
+                <div>
+                    <h4 class="mb-0 form-title ">Create Post</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form|crispy }}  
-
+                        {{ form }}
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit"
+                                    class="border-0 bg-accent-primary-custom border-radius-12 text-white">
                                 Publish Post
                             </button>
                         </div>
@@ -24,5 +22,4 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

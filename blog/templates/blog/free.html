@@ -1,6 +1,6 @@
 {% for post in posts %}
     <div class="col-4  mb-4 border-radius-12">
-        <div class="card h-100 shadow-sm border-radius-top-12">
+        <div class="card h-100 shadow-sm ">
             <!-- Post Image -->
             <a href="{% url 'post-detail' post.pk %}">
                 <img src="{{ post.author.profile.profile_picture.url }}"
@@ -25,8 +25,8 @@
                 </p>
                 <div class="mt-auto d-flex align-items-center">
                     <!-- Author Image -->
-                    <img src="{{ post.author.profile.profile_picture.url }}"
-                         alt="{{ post.author.username }}"
+                    <img src="{{ user_profile.profile.profile_picture.url }}"
+                         alt="{{ user_profile.username }}"
                          class="rounded-circle me-2"
                          style="width:40px;
                                 height:40px;

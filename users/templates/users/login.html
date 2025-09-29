@@ -2,8 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="col-md-6 offset-md-3">
-        <div class="card shadow-sm p-4 rounded">
-            <h2 class="text-center mb-4">Login</h2>
+        <div class="card shadow-sm p-4 rounded bg-transparent">
+            <h2 class="mb-0 form-title ">Login</h2>
             <form method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -12,7 +12,8 @@
                     <a href="{% url 'password_reset' %}" class="text-decoration-none">Forgot your password?</a>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Log In</button>
+                    <button type="submit"
+                            class="border-0 bg-accent-primary-custom border-radius-12 text-white">Log In</button>
                 </div>
             </form>
             <hr>

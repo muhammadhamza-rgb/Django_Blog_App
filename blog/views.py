@@ -29,20 +29,14 @@ class PostListView(ListView):
     ordering = ["-date_posted"]
     paginate_by = 6
 
-    def get(self, request, *args, **kwargs):
-        self.object_list = self.get_queryset()
-        paginator = Paginator(self.object_list, self.paginate_by)
-        page_number = request.GET.get("page", 1)
-        page_obj = paginator.get_page(page_number)
+    def render_to_response(self, context, **response_kwargs):
+        request = self.request
+        page_obj = context["page_obj"]
 
-        context = self.get_context_data()
-        context["posts"] = page_obj
-
-        # Django 4+ compatible AJAX check
         if request.headers.get("x-requested-with") == "XMLHttpRequest":
             return render(request, "blog/post_partial.html", {"posts": page_obj})
 
-        return render(request, self.template_name, context)
+        return super().render_to_response(context, **response_kwargs)
 
 
 class PostDetailView(DetailView):
@@ -52,7 +46,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "content", "category"]
+    fields = ["title", "category", "content"]
     template_name = "blog/post_form.html"  # <app>/<model>_<viewtype>.html
 
     def form_valid(self, form):
@@ -62,7 +56,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "category", "content"]
     # template_name = "blog/post_form.html"  # <app>/<model>_<viewtype>.html
 
     def form_valid(self, form):

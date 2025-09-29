@@ -12,8 +12,10 @@ function getDeleteUrl(userId) {
 }
 // Initialize DataTable on document ready
 $(document).ready(function () {
-  $("#usersTable").DataTable({
-    pagingType: "simple_numbers",
+  new DataTable("#usersTable", {
+    paging: false,
+    scrollCollapse: true,
+    scrollY: "50vh",
     ajax: {
       url: "/users/post/json/", // 👈 your endpoint for fetching data
       dataSrc: "data", // 👈 tells DataTables where to find the array
