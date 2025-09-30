@@ -1,43 +1,10 @@
 {% extends "blog/base.html" %}
 {% block content %}
-  <h1>Welcome to the Blog</h1>
-  <p>Here are the latest posts:</p>
-  <div class="container my-4">
-    {% for post in posts %}
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-2">
-            <!-- Small Profile Image -->
-            <img src="{{ post.author.profile.profile_picture.url }}"
-                 alt="{{ post.author.username }}"
-                 class="rounded-circle me-2"
-                 style="width: 40px;
-                        height: 40px;
-                        object-fit: cover" />
-            <!-- Post Title -->
-            <h3 class="card-title mb-0">
-              <a href="{% url 'post-detail' post.pk %}"
-                 class="text-decoration-none text-dark link-primary">{{ post.title | title }}</a>
-            </h3>
-          </div>
-          <!-- Author and Date -->
-          <p class="text-muted mb-2">
-            By
-            <strong>
-              <a href="{% url 'user-posts' post.author.username %}"
-                 class="text-decoration-none">{{ post.author }}</a>
-            </strong>
-            || {{ post.date_posted|date:"d F, Y" }}
-          </p>
-          <!-- Post Content -->
-          <p class="card-text">{{ post.content|capfirst|truncatewords:30 }}</p>
-          <a href="{% url 'post-detail' post.pk %}"
-             class="btn btn-sm btn-outline-primary">Read More</a>
-          <!-- Status -->
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+  <div class="row" id="post-container">{% include 'blog/post_partial.html' %}</div>
+  {% comment %} <div id="sentinel" style="height: 1px;"></div>
+  <div id="loading" class="text-center my-3" style="display:none;">
+    <div class="spinner-border text-primary"></div>
+  </div> {% endcomment %}
   <!-- Pagination Controls -->
   {% if is_paginated %}
     <nav aria-label="Page navigation">

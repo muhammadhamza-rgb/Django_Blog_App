@@ -1,0 +1,48 @@
+<hr>
+<!-- Navigation -->
+<ul class="nav nav-pills flex-column   ">
+    <li class="nav-item btn border-0 border-radius {% if request.resolver_match.url_name == 'blog-home' %} bg-accent-secondary-custom box-shadow-custom {% else %} text-white-custom {% endif %} text-start">
+        <a href="{% url 'blog-home' %}"
+           class="text-decoration-none text-white-custom d-block w-100 py-1">
+            <i class="bi bi-house-door me-2"></i>Home</a>
+    </li>
+    <li class="nav-item btn  border-0 border-radius mt-3 {% if request.resolver_match.url_name == 'blog-about' %} bg-accent-secondary-custom box-shadow-customm{% else %} text-white-custom {% endif %} text-start">
+        <a href="{% url 'blog-about' %}"
+           class="text-decoration-none text-white-custom d-block w-100 py-1">
+            <i class="bi bi-file-person me-2"></i>About</a>
+    </li>
+</ul>
+<!-- Categories Label (Parent) -->
+<li class="nav-item btn border-radius mt-3{% if request.resolver_match.url_name == 'post-category' %} bg-accent-primary-custom box-shadow-custom{% else %} text-white-custom {% endif %} text-white text-start">
+    <span class="d-block w-100 py-1">
+        <i class="fa-solid fa-layer-group me-2"></i>Categories</span>
+</li>
+<div class="flex-grow-1 overflow-auto mt-1 pe-1 custom-scrollbar">
+    <ul class="nav nav-pills flex-column ">
+        {% if categories %}
+            {% for category in categories %}
+                {% url 'post-category' category as category_url %}
+                <li class="nav-item btn  border-0 border-radius mt-1 {% if request.path == category_url %} bg-accent-secondary-custom box-shadow-custom {% else %} text-white-custom {% endif %} ms-3 text-start">
+                    <a href="{% url 'post-category' category %}"
+                       class="text-white d-block w-100 py-1 text-decoration-none">
+                        {% if category == "Health" %}
+                            <i class="fa-solid fa-heart-pulse me-2"></i>
+                        {% elif category == "Food" %}
+                            <i class="fa-solid fa-utensils me-2"></i>
+                        {% elif category == "Education" %}
+                            <i class="fa-solid fa-graduation-cap me-2"></i>
+                        {% elif category == "Technology" %}
+                            <i class="fa-solid fa-laptop-code me-2"></i>
+                        {% elif category == "Finance" %}
+                            <i class="fa-solid fa-dollar-sign me-2"></i>
+                        {% elif category == "Travel" %}
+                            <i class="fa-solid fa-plane me-2"></i>
+                        {% elif category == "Lifestyle" %}
+                            <i class="fa-solid fa-heart me-2"></i>
+                        {% endif %}
+                    {{ category|capfirst }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
