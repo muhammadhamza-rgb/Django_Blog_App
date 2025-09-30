@@ -103,29 +103,24 @@ class UserPostListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CategoryPostListView(ListView):
-    model = Post
-    template_name = "blog/category_posts.html"  # you can reuse home.html if you want
-    context_object_name = "posts"
-    ordering = ["-date_posted"]
-    paginate_by = 5
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
 
-    def get_queryset(self):
-        return Post.objects.filter(category=self.kwargs.get("category")).order_by(
-            "-date_posted"
-        )
+    categories = (
+        Post.objects.values_list("category", flat=True)
+        .distinct()
+        .exclude(category__isnull=True)
+        .exclude(category__exact="")
+    )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["category"] = self.kwargs.get("category")
-        context["categories"] = (
-            Post.objects.values_list("category", flat=True)
-            .distinct()
-            .exclude(category__isnull=True)
-            .exclude(category__exact="")
-        )
+    categories = list(categories)
+    if "Others" in categories:
+        categories.remove("Others")
+        categories.append("Others")
 
-        return context
+    context["category"] = self.kwargs.get("category")
+    context["categories"] = categories
+    return context
 
 
 def about(request):

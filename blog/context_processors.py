@@ -8,4 +8,10 @@ def categories_context(request):
         .exclude(category__exact="")  # remove empty string
         .distinct()
     )
+
+    categories = list(categories)
+    if "Others" in categories:
+        categories.remove("Others")
+        categories.append("Others")
+
     return {"categories": categories}
