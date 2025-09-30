@@ -1,6 +1,7 @@
 # from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -23,10 +24,19 @@ from .models import Post
 
 class PostListView(ListView):
     model = Post
-    template_name = "blog/home.html"  # <app>/<model>_<viewtype>.html
+    template_name = "blog/home.html"
     context_object_name = "posts"
     ordering = ["-date_posted"]
-    paginate_by = 3
+    paginate_by = 6
+
+    def render_to_response(self, context, **response_kwargs):
+        request = self.request
+        page_obj = context["page_obj"]
+
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return render(request, "blog/post_partial.html", {"posts": page_obj})
+
+        return super().render_to_response(context, **response_kwargs)
 
 
 class PostDetailView(DetailView):
@@ -36,7 +46,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "content", "category"]
+    fields = ["title", "category", "content"]
     template_name = "blog/post_form.html"  # <app>/<model>_<viewtype>.html
 
     def form_valid(self, form):
@@ -46,7 +56,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "category", "content"]
     # template_name = "blog/post_form.html"  # <app>/<model>_<viewtype>.html
 
     def form_valid(self, form):
